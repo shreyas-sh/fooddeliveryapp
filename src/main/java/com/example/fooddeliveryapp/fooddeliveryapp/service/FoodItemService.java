@@ -16,19 +16,23 @@ public class FoodItemService {
         this.foodItemRepository = foodItemRepository;
     }
 
-    List<FoodItem> findAll() {
+    public List<FoodItem> findAll() {
         return foodItemRepository.findAll();
     }
 
-    Optional<FoodItem> findById(Long id) {
+    public Optional<FoodItem> findById(Long id) {
         return foodItemRepository.findById(id);
     }
 
-    void save(FoodItem foodItem) {
+    public void save(FoodItem foodItem) {
         foodItemRepository.save(foodItem);
     }
 
-    void deleteById(Long id) {
+    public void deleteById(Long id) {
         foodItemRepository.deleteById(id);
+    }
+
+    public void deleteAll() {
+        foodItemRepository.deleteAll();
     }
 }

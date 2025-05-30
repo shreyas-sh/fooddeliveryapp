@@ -17,19 +17,23 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    List<Orders> findAll() {
+    public List<Orders> findAll() {
         return orderRepository.findAll();
     }
 
-    Optional<Orders> findById(Long id) {
+    public Optional<Orders> findById(Long id) {
         return orderRepository.findById(id);
     }
 
-    void save(Orders order) {
+    public void save(Orders order) {
         orderRepository.save(order);
     }
 
-    void deleteById(Long id) {
+    public void deleteById(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    public void deleteAll() {
+        orderRepository.deleteAll();
     }
 }
