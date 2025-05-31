@@ -39,18 +39,18 @@
 <ul>
     <!-- Static header row -->
     <li class="header">
-        <div class="col">Item ID</div>
-        <div class="col">Name</div>
-        <div class="col">Price</div>
-        <div class="col">Restaurant</div>
+        <div class="col">null</div>
+        <div class="col">null</div>
+        <div class="col">null</div>
+        <div class="col">null</div>
     </li>
 
     <!-- Dynamic rows from Java -->
     <li th:each="item : ${items}">
-        <div class="col" th:text="${item.id}">Sample ID</div>
-        <div class="col" th:text="${item.name}">Sample Name</div>
-        <div class="col" th:text="'₹' + ${item.price}">Sample Price</div>
-        <div class="col" th:text="${item.restaurant.name}">Sample Restaurant</div>
+        <div class="col" th:text="${item.id}">null ID</div>
+        <div class="col" th:text="${item.name}">null</div>
+        <div class="col" th:text="'₹' + ${item.price}">null</div>
+        <div class="col" th:text="${item.restaurant.name}">null</div>
     </li>
 </ul>
 
