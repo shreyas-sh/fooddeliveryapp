@@ -9,9 +9,16 @@ public class FoodItem {
     private Long item_id;
     private String name;
     private double price;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Restaurant restaurant;
+
+    public FoodItem() {}
+
+    public FoodItem(String name, double price, Restaurant restaurant) {
+        setName(name);
+        setPrice(price);
+        setRestaurant(restaurant);
+    }
 
     public Long getId() {
         return item_id;

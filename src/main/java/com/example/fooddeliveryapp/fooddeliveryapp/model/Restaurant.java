@@ -1,19 +1,23 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long restaurant_id;
-
     private String name;
-
     private String location;
+
+    public Restaurant() {}
+
+    public Restaurant(String name, String location) {
+        setName(name);
+        setLocation(location);
+    }
 
     public Long getRestaurant_id() {
         return restaurant_id;
