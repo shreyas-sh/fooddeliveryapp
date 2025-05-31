@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
+import com.example.fooddeliveryapp.fooddeliveryapp.WrongTypeException;
 import jakarta.persistence.*;
 
 @Entity
@@ -45,7 +46,13 @@ public class FoodItem {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        try {
+            if (price <= 0)
+                throw new WrongTypeException("Price should by positive");
+            this.price = price;
+        } catch (WrongTypeException e) {
+            this.price = 100;
+        }
     }
 
     public void setRestaurant(Restaurant restaurant) {
