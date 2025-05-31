@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orders with Items</title>
+  <style>
+    body {
+        font-family: sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    table {
+        width: 90%;
+        margin: auto;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f0f0f0;
+    }
+    tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Orders List</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Order ID</th>
+    <th>User</th>
+    <th>Restaurant</th>
+    <th>Item Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="order : ${orders}">
+    <td th:rowspan="${#lists.size(order.items)}" th:text="${order.order_id}">null</td>
+    <td th:rowspan="${#lists.size(order.items)}" th:text="${order.user.name}">null</td>
+    <td th:rowspan="${#lists.size(order.items)}" th:text="${order.restaurant.name}">null</td>
+    <td th:text="${order.items[0].name}">null</td>
+  </tr>
+  <tr th:each="item, iterStat : ${order.items}"
+      th:if="${iterStat.index > 0}">
+    <td th:text="${item.name}">null</td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

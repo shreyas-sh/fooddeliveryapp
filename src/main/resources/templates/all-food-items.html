@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Items List</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: auto;
+        }
+        li {
+            display: flex;
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        .header {
+            font-weight: bold;
+            border-bottom: 2px solid black;
+            background-color: #f0f0f0;
+        }
+        .col {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Available Food Items</h1>
+
+<ul>
+    <!-- Static header row -->
+    <li class="header">
+        <div class="col">Item ID</div>
+        <div class="col">Name</div>
+        <div class="col">Price</div>
+        <div class="col">Restaurant</div>
+    </li>
+
+    <!-- Dynamic rows from Java -->
+    <li th:each="item : ${items}">
+        <div class="col" th:text="${item.id}">Sample ID</div>
+        <div class="col" th:text="${item.name}">Sample Name</div>
+        <div class="col" th:text="'₹' + ${item.price}">Sample Price</div>
+        <div class="col" th:text="${item.restaurant.name}">Sample Restaurant</div>
+    </li>
+</ul>
+
+</body>
+</html>
