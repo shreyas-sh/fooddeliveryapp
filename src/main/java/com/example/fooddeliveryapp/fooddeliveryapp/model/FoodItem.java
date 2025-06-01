@@ -10,16 +10,14 @@ public class FoodItem {
     private Long item_id;
     private String name;
     private double price;
-    @ManyToOne
-    @JoinColumn(name = "restaurant_restaurant_id")
-    private Restaurant restaurant;
+    private Long restaurant_id;
 
     public FoodItem() {}
 
-    public FoodItem(String name, double price, Restaurant restaurant) {
+    public FoodItem(String name, double price, Long restaurant_id) {
         setName(name);
         setPrice(price);
-        setRestaurant(restaurant);
+        setRestaurant_id(restaurant_id);
     }
 
     public Long getId() {
@@ -32,6 +30,10 @@ public class FoodItem {
 
     public double getPrice() {
         return price;
+    }
+
+    public Long getRestaurant_id() {
+        return restaurant_id;
     }
 
     public void setId(Long item_id) {
@@ -52,7 +54,7 @@ public class FoodItem {
         }
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurant_id(Long restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 }

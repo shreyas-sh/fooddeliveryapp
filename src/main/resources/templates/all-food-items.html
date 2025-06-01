@@ -47,10 +47,10 @@
 
     <!-- Dynamic rows from Java -->
     <li th:each="item : ${items}">
-        <div class="col" th:text="${item.id}">null ID</div>
-        <div class="col" th:text="${item.name}">null</div>
-        <div class="col" th:text="'₹' + ${item.price}">null</div>
-        <div class="col" th:text="${item.restaurant.name}">null</div>
+        <div class="col" th:text="${item.id}"></div>
+        <div class="col" th:text="${item.name}"></div>
+        <div class="col" th:text="'₹' + ${item.price}"></div>
+        <div class="col" th:text="${item.restaurant_id}"></div>
     </li>
 </ul>
 

@@ -18,6 +18,11 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @GetMapping("/")
+    public String rootPage(Model model) {
+        return "user-root-page";
+    }
+
     @GetMapping("/all")
     public String showUsers(Model model) {
         List<User> users = service.findAll();
@@ -42,7 +47,7 @@ public class UserController {
         return "add-user";
     }
 
-    @PostMapping("/all")
+    @PostMapping("/intermediate")
     public String addedUserDisplay(
             @RequestParam("name") String name,
             @RequestParam("email") String email,
@@ -50,6 +55,26 @@ public class UserController {
     ) {
         User user = new User(name, email);
         service.save(user);
+        return showUsers(model);
+    }
+
+    @GetMapping("/deletebyid")
+    public String deleteIdForm(Model model) {
+        return "delete-user-by-id";
+    }
+
+    @PostMapping("/all")
+    public String deleteUserById(
+            @RequestParam("id") Long id,
+            Model model
+    ) {
+        service.deleteById(id);
+        return showUsers(model);
+    }
+
+    @PostMapping("/deleteall")
+    public String deleteAll(Model model) {
+        service.deleteAll();
         return showUsers(model);
     }
 }

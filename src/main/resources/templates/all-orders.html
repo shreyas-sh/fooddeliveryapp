@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <title>Orders with Items</title>
+  <meta charset="UTF-8">
+  <title>Order List</title>
   <style>
     body {
         font-family: sans-serif;
@@ -11,50 +11,48 @@
     h1 {
         text-align: center;
     }
-    table {
-        width: 90%;
+    ul {
+        list-style: none;
+        padding: 0;
+        max-width: 800px;
         margin: auto;
-        border-collapse: collapse;
     }
-    th, td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
+    li {
+        display: flex;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
     }
-    th {
+    .header {
+        font-weight: bold;
+        border-bottom: 2px solid black;
         background-color: #f0f0f0;
     }
-    tr:nth-child(even) {
-        background-color: #fafafa;
+    .col {
+        flex: 1;
     }
   </style>
 </head>
 <body>
 
-<h1>Orders List</h1>
+<h1>Order List</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Order ID</th>
-    <th>User</th>
-    <th>Restaurant</th>
-    <th>Item Name</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="order : ${orders}">
-    <td th:rowspan="${#lists.size(order.items)}" th:text="${order.order_id}">null</td>
-    <td th:rowspan="${#lists.size(order.items)}" th:text="${order.user.name}">null</td>
-    <td th:rowspan="${#lists.size(order.items)}" th:text="${order.restaurant.name}">null</td>
-    <td th:text="${order.items[0].name}">null</td>
-  </tr>
-  <tr th:each="item, iterStat : ${order.items}"
-      th:if="${iterStat.index > 0}">
-    <td th:text="${item.name}">null</td>
-  </tr>
-  </tbody>
-</table>
+<ul>
+  <!-- Static header row -->
+  <li class="header">
+    <div class="col">Order ID</div>
+    <div class="col">User ID</div>
+    <div class="col">Restaurant ID</div>
+    <div class="col">Food Item ID</div>
+  </li>
+
+  <!-- Dynamic rows -->
+  <li th:each="order : ${orders}">
+    <div class="col" th:text="${order.order_id}"></div>
+    <div class="col" th:text="${order.user_id}"></div>
+    <div class="col" th:text="${order.restaurant_id}"></div>
+    <div class="col" th:text="${order.food_item_id}"></div>
+  </li>
+</ul>
 
 </body>
 </html>

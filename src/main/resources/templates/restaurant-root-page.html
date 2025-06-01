@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Operations</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 220px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Choose Operation</h1>
+
+<div class="form-container">
+
+    <!-- Find All -->
+    <form th:action="@{/restaurant/all}" method="get">
+        <button type="submit">Find All</button>
+    </form>
+
+    <!-- Find by ID -->
+    <form th:action="@{/restaurant/findbyid}" method="get">
+        <button type="submit">Find by ID</button>
+    </form>
+
+    <!-- Save -->
+    <form th:action="@{/restaurant/addrestaurant}" method="get">
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Delete by ID -->
+    <form th:action="@{/restaurant/deletebyid}" method="get">
+        <button type="submit">Delete by ID</button>
+    </form>
+
+    <!-- Delete All -->
+    <form th:action="@{/restaurant/deleteall}" method="post">
+        <button type="submit">Delete All</button>
+    </form>
+
+</div>
+
+</body>
+</html>

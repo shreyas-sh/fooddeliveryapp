@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Add User</title>
+    <title>Add Restaurant</title>
     <style>
         body {
             font-family: sans-serif;
@@ -21,8 +21,7 @@
             margin-bottom: 15px;
             font-size: 16px;
         }
-        input[type="text"],
-        input[type="email"] {
+        input[type="text"] {
             padding: 8px;
             font-size: 14px;
         }
@@ -38,15 +37,15 @@
 </head>
 <body>
 
-<h2 style="text-align:center;">Add New User</h2>
+<h2 style="text-align:center;">Add New Restaurant</h2>
 
 <div class="form-container">
-    <form th:action="@{/users/intermediate}" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter name" required />
+    <form th:action="@{/restaurant/intermediate}" method="post">
+        <label for="name">Restaurant Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter restaurant name" required />
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter email" required />
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" placeholder="Enter location" required />
 
         <div class="button-container">
             <button type="submit">Submit</button>

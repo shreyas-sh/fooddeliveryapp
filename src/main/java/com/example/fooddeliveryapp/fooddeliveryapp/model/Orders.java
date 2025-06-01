@@ -9,60 +9,47 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_id;
-
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
-
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(
-            name = "order_fooditems",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
-    private List<FoodItem> items;
+    private Long user_id;
+    private Long restaurant_id;
+    private Long food_item_id;
 
     public Orders() {}
 
-    public Orders(User user, Restaurant restaurant, List<FoodItem> items) {
-        setUser(user);
-        setRestaurant(restaurant);
-        setItems(items);
+    public Orders(Long user_id, Long restaurant_id, Long food_item_id) {
+        setUser_id(user_id);
+        setRestaurant_id(restaurant_id);
+        setFood_item_id(food_item_id);
     }
 
     public Long getOrder_id() {
         return order_id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public Long getRestaurant_id() {
+        return restaurant_id;
     }
 
-    public List<FoodItem> getItems() {
-        return items;
+    public Long getFood_item_id() {
+        return food_item_id;
     }
 
     public void setOrder_id(Long order_id) {
         this.order_id = order_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurant_id(Long restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 
-    public void setItems(List<FoodItem> items) {
-        this.items = items;
+    public void setFood_item_id(Long food_item_id) {
+        this.food_item_id = food_item_id;
     }
 }

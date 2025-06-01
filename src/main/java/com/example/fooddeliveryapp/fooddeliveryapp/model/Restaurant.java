@@ -1,9 +1,10 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
 import com.example.fooddeliveryapp.fooddeliveryapp.exception.WrongTypeException;
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Restaurant {
@@ -12,8 +13,6 @@ public class Restaurant {
     private Long restaurant_id;
     private String name;
     private String location;
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private List<FoodItem> items;
 
     public Restaurant() {}
 

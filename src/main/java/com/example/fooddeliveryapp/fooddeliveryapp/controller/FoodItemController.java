@@ -23,6 +23,11 @@ public class FoodItemController {
     @Autowired
     private RestaurantService restaurantService;
 
+    @GetMapping("/")
+    public String rootPage(Model model) {
+        return "food-item-root-page";
+    }
+
     @GetMapping("/all")
     public String showFoodItems(Model model) {
         List<FoodItem> items = service.findAll();
@@ -44,13 +49,13 @@ public class FoodItemController {
 
     @GetMapping("/deletebyid")
     public String deleteIdForm(Model model) {
-        return "food-item-by-id";
+        return "delete-food-item-by-id";
     }
 
     @PostMapping("/deletebyid")
     public String deleteFoodItemById(@RequestParam("id") Long id, Model model) {
         service.deleteById(id);
-        return "all-restaurants";
+        return showFoodItems(model);
     }
 
     @GetMapping("/addfooditem")
@@ -67,11 +72,17 @@ public class FoodItemController {
     ) {
         Optional<Restaurant> restaurantOptional = restaurantService.findById(restaurant_id);
         if (restaurantOptional.isPresent()) {
-            service.save(new FoodItem(name, price, restaurantOptional.get()));
+            service.save(new FoodItem(name, price, restaurant_id));
         } else {
-            model.addAttribute("message", "Restaurant ID not found");
+            model.addAttribute("message", "Food Item ID not found");
             return "message";
         }
-        return "all-food-items";
+        return showFoodItems(model);
+    }
+
+    @PostMapping("/deleteall")
+    public String deleteAll(Model model) {
+        service.deleteAll();
+        return showFoodItems(model);
     }
 }

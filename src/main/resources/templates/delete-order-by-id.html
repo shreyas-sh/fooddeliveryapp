@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit ID</title>
+  <style>
+    body {
+        font-family: sans-serif;
+        margin: 40px;
+    }
+    .form-container {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+    label, input {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    input[type="text"] {
+        padding: 8px;
+        font-size: 14px;
+    }
+    .button-container {
+        text-align: center;
+    }
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <form th:action="@{/orders/deletebyid}" method="post">
+    <label for="inputId">Enter ID:</label>
+    <input type="text" id="inputId" name="id" placeholder="Enter ID here" required />
+
+    <div class="button-container">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
