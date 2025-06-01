@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .message-box {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+<body>
+<h1>Database Error</h1>
+<div class="messagebox">
+    <h2 th:text="${message}">Database Error has occurred</h2>
+</div>
+
+</body>
+</html>

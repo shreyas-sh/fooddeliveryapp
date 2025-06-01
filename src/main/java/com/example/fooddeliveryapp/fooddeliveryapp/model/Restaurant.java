@@ -1,10 +1,9 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
-import com.example.fooddeliveryapp.fooddeliveryapp.WrongTypeException;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.fooddeliveryapp.fooddeliveryapp.exception.WrongTypeException;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Restaurant {
@@ -13,9 +12,10 @@ public class Restaurant {
     private Long restaurant_id;
     private String name;
     private String location;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<FoodItem> items;
 
-    public Restaurant() {
-    }
+    public Restaurant() {}
 
     public Restaurant(String name, String location) {
         setName(name);
@@ -46,12 +46,13 @@ public class Restaurant {
         try {
             if (!Character.isUpperCase(location.charAt(0)))
                 throw new WrongTypeException("Invalid location name");
+            this.location = location;
         } catch (WrongTypeException e) {
             if (location == null || location.isEmpty())
                 location = "";
             else
                 location = location.substring(0, 1).toUpperCase() + location.substring(1).toLowerCase();
+            this.location = location;
         }
-        this.location = location;
     }
 }

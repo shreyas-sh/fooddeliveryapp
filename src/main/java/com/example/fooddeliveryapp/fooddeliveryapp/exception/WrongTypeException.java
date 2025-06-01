@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.fooddeliveryapp;
+package com.example.fooddeliveryapp.fooddeliveryapp.exception;
 
 public class WrongTypeException extends RuntimeException {
     private String message;

@@ -1,6 +1,6 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
-import com.example.fooddeliveryapp.fooddeliveryapp.WrongTypeException;
+import com.example.fooddeliveryapp.fooddeliveryapp.exception.WrongTypeException;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +10,8 @@ public class FoodItem {
     private Long item_id;
     private String name;
     private double price;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
+    @JoinColumn(name = "restaurant_restaurant_id")
     private Restaurant restaurant;
 
     public FoodItem() {}
@@ -31,10 +32,6 @@ public class FoodItem {
 
     public double getPrice() {
         return price;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
     }
 
     public void setId(Long item_id) {

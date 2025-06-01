@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class RestaurantController {
     private RestaurantService service;
 
     @GetMapping("/all")
-    public String showFoodItems(Model model) {
+    public String showRestaurants(Model model) {
         List<Restaurant> items = service.findAll();
         model.addAttribute("restaurants", items);
         return "all-restaurants";
@@ -32,9 +31,21 @@ public class RestaurantController {
     }
 
     @PostMapping("/resultbyid")
-    public String getFoodById(@RequestParam("id") Long id, Model model) {
+    public String getRestaurantById(@RequestParam("id") Long id, Model model) {
         Optional<Restaurant> restaurant = service.findById(id);
         restaurant.ifPresent(value -> model.addAttribute("restaurants", value));
         return "all-restaurants";
+    }
+
+    @GetMapping("/deletebyid")
+    public String deleteIdForm(Model model) {
+        return "restaurant-by-id";
+    }
+
+    @PostMapping("/all")
+    public String deleteRestaurantById(@RequestParam("id") Long id, Model model) {
+        Optional<Restaurant> deletedRestaurant = service.findById(id);
+        service.deleteById(id);
+        return showRestaurants(model);
     }
 }

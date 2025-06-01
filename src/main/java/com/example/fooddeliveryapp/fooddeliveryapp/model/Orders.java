@@ -10,22 +10,21 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "order_fooditems",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private List<FoodItem> items;
-
 
     public Orders() {}
 
