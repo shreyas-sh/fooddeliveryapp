@@ -8,53 +8,45 @@ public class FoodItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long item_id;
+
     private String name;
     private double price;
-    private Long restaurant_id;
 
-    public FoodItem() {}
-
-    public FoodItem(String name, double price, Long restaurant_id) {
-        setName(name);
-        setPrice(price);
-        setRestaurant_id(restaurant_id);
+    public FoodItem() {
     }
 
-    public Long getId() {
+    public FoodItem(String name, double price) {
+        setName(name);
+        setPrice(price);
+    }
+
+    public Long getItem_id() {
         return item_id;
+    }
+
+    public void setItem_id(Long item_id) {
+        this.item_id = item_id;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public Long getRestaurant_id() {
-        return restaurant_id;
-    }
-
-    public void setId(Long item_id) {
-        this.item_id = item_id;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {
         try {
             if (price <= 0)
-                throw new WrongTypeException("Price should by positive");
+                throw new WrongTypeException("Price should be positive");
             this.price = price;
         } catch (WrongTypeException e) {
             this.price = 100;
         }
-    }
-
-    public void setRestaurant_id(Long restaurant_id) {
-        this.restaurant_id = restaurant_id;
     }
 }

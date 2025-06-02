@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Add Restaurant</title>
+    <title>Add Restaurant & Food Item IDs</title>
     <style>
         body {
             font-family: sans-serif;
@@ -10,7 +10,7 @@
         }
         .form-container {
             max-width: 400px;
-            margin: auto;
+            margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -33,14 +33,24 @@
             font-size: 14px;
             cursor: pointer;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-<h2 style="text-align:center;">Add New Restaurant</h2>
+<h2>Add New Restaurant & Food Item IDs</h2>
 
 <div class="form-container">
-    <form th:action="@{/restaurant/intermediate}" method="post">
+    <form th:action="@{/restaurant/intermediate}" method="post" onsubmit="return validateInput()">
         <label for="name">Restaurant Name:</label>
         <input type="text" id="name" name="name" placeholder="Enter restaurant name" required />
 

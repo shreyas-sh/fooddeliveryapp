@@ -75,6 +75,14 @@
         <button type="submit">Delete All</button>
     </form>
 
+    <form th:action="@{/restaurant/restaurantfooditemform}" method="get">
+        <button type="submit">Add Food Item</button>
+    </form>
+
+    <form th:action="@{/restaurant/assocfooditems}" method="get">
+        <button type="submit">Show Food Item</button>
+    </form>
+
 </div>
 
 </body>

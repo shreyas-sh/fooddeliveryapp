@@ -1,7 +1,9 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.controller;
 
+import com.example.fooddeliveryapp.fooddeliveryapp.model.FoodItem;
 import com.example.fooddeliveryapp.fooddeliveryapp.model.Restaurant;
 import com.example.fooddeliveryapp.fooddeliveryapp.model.User;
+import com.example.fooddeliveryapp.fooddeliveryapp.service.FoodItemService;
 import com.example.fooddeliveryapp.fooddeliveryapp.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ import java.util.Optional;
 public class RestaurantController {
     @Autowired
     private RestaurantService service;
+
+    @Autowired
+    private FoodItemService foodItemService;
 
     @GetMapping("/")
     public String rootPage(Model model) {
@@ -74,5 +79,51 @@ public class RestaurantController {
     public String deleteAll(Model model) {
         service.deleteAll();
         return showRestaurants(model);
+    }
+
+    @GetMapping("/restaurantfooditemform")
+    public String restaurantFoodItemForm(Model model) {
+        return "show-restaurant-item-by-id";
+    }
+
+    @PostMapping("/showrestaurantfooditems")
+    public String addRestaurantItems(
+            @RequestParam("restaurant_id") Long id,
+            @RequestParam("food_item_id") Long foodItemId,
+            Model model
+    ) {
+        Optional<Restaurant> restaurant = service.findById(id);
+        if (restaurant.isPresent()) {
+            Restaurant res = restaurant.get();
+            Optional<FoodItem> foodItem = foodItemService.findById(foodItemId);
+            if (foodItem.isPresent()) {
+                List<FoodItem> items = res.getFoodItemList();
+                items.add(foodItem.get());
+                res.setFoodItemList(items);
+                service.save(res);
+            }
+            model.addAttribute("items", restaurant.get().getFoodItemList());
+        } else {
+            model.addAttribute("message", "Restaurant ID not found");
+            return "message";
+        }
+        return "all-food-items";
+    }
+
+    @GetMapping("/assocfooditems")
+    public String assocFoodItemForm() {
+        return "restaurant-assoc";
+    }
+
+    @PostMapping("/allassocfooditems")
+    public String assocFoodItems(
+            @RequestParam("id") Long id,
+            Model model
+    ) {
+        Optional<Restaurant> restaurant = service.findById(id);
+        if (restaurant.isPresent()) {
+            model.addAttribute("items", restaurant.get().getFoodItemList());
+        }
+        return "all-food-items";
     }
 }

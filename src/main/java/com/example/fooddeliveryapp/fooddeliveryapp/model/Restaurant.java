@@ -1,18 +1,23 @@
 package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
 import com.example.fooddeliveryapp.fooddeliveryapp.exception.WrongTypeException;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long restaurant_id;
+
     private String name;
     private String location;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "restaurant_id")  // FK column in FoodItem table
+    private List<FoodItem> foodItemList = new ArrayList<>();
 
     public Restaurant() {}
 
@@ -53,5 +58,13 @@ public class Restaurant {
                 location = location.substring(0, 1).toUpperCase() + location.substring(1).toLowerCase();
             this.location = location;
         }
+    }
+
+    public List<FoodItem> getFoodItemList() {
+        return foodItemList;
+    }
+
+    public void setFoodItemList(List<FoodItem> foodItemList) {
+        this.foodItemList = foodItemList;
     }
 }

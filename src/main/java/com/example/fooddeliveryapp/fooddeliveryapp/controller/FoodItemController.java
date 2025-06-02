@@ -67,16 +67,9 @@ public class FoodItemController {
     public String addedFoodItemDisplay(
             @RequestParam("name") String name,
             @RequestParam("price") double price,
-            @RequestParam("restaurant_id") Long restaurant_id,
             Model model
     ) {
-        Optional<Restaurant> restaurantOptional = restaurantService.findById(restaurant_id);
-        if (restaurantOptional.isPresent()) {
-            service.save(new FoodItem(name, price, restaurant_id));
-        } else {
-            model.addAttribute("message", "Food Item ID not found");
-            return "message";
-        }
+        service.save(new FoodItem(name, price));
         return showFoodItems(model);
     }
 

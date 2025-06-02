@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Assign Food Items to Restaurant</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 40px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 8px;
+            font-size: 14px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        button {
+            padding: 8px 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Assign Food Items to a Restaurant</h2>
+
+<div class="form-container">
+    <form th:action="@{/restaurant/showrestaurantfooditems}" method="post">
+        <label for="restaurant_id">Restaurant ID:</label>
+        <input type="number" id="restaurant_id" name="restaurant_id" placeholder="Enter restaurant ID" required />
+
+        <label for="food_item_id">Food Item ID:</label>
+        <input type="text" id="food_item_id" name="food_item_id" placeholder="Enter food item ID (integer)" required />
+
+        <div class="error" id="errorMsg"></div>
+
+        <div class="button-container">
+            <button type="submit">Add Item</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function validateFoodId() {
+        const foodIdInput = document.getElementById("food_item_id").value.trim();
+        const errorMsg = document.getElementById("errorMsg");
+
+        const pattern = /^\d+$/;
+
+        if (!pattern.test(foodIdInput)) {
+            errorMsg.textContent = "Food item ID must be an integer.";
+            return false;
+        }
+
+        errorMsg.textContent = "";
+        return true;
+    }
+</script>
+
+</body>
+</html>
