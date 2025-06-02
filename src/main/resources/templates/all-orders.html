@@ -48,9 +48,9 @@
   <!-- Dynamic rows -->
   <li th:each="order : ${orders}">
     <div class="col" th:text="${order.order_id}"></div>
-    <div class="col" th:text="${order.user_id}"></div>
-    <div class="col" th:text="${order.restaurant_id}"></div>
-    <div class="col" th:text="${order.food_item_id}"></div>
+    <div class="col" th:text="${order.user.user_id}"></div>
+    <div class="col" th:text="${order.restaurant.restaurant_id}"></div>
+    <div class="col" th:text="${order.foodItem.item_id}"></div>
   </li>
 </ul>
 

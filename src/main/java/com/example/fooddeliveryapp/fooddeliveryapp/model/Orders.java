@@ -2,54 +2,62 @@ package com.example.fooddeliveryapp.fooddeliveryapp.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Orders {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_id;
-    private Long user_id;
-    private Long restaurant_id;
-    private Long food_item_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "food_item_id", nullable = false)
+    private FoodItem foodItem;
 
     public Orders() {}
 
-    public Orders(Long user_id, Long restaurant_id, Long food_item_id) {
-        setUser_id(user_id);
-        setRestaurant_id(restaurant_id);
-        setFood_item_id(food_item_id);
+    public Orders(User user, Restaurant restaurant, FoodItem foodItem) {
+        this.user = user;
+        this.restaurant = restaurant;
+        this.foodItem = foodItem;
     }
 
     public Long getOrder_id() {
         return order_id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public Long getRestaurant_id() {
-        return restaurant_id;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public Long getFood_item_id() {
-        return food_item_id;
+    public FoodItem getFoodItem() {
+        return foodItem;
     }
 
     public void setOrder_id(Long order_id) {
         this.order_id = order_id;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setRestaurant_id(Long restaurant_id) {
-        this.restaurant_id = restaurant_id;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
-    public void setFood_item_id(Long food_item_id) {
-        this.food_item_id = food_item_id;
+    public void setFoodItem(FoodItem foodItem) {
+        this.foodItem = foodItem;
     }
 }

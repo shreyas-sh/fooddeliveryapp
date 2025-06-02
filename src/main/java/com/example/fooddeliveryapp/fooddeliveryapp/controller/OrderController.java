@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,7 +86,7 @@ public class OrderController {
         Optional<Restaurant> restaurant = restaurantService.findById(restaurant_id);
         Optional<FoodItem> foodItem = foodItemService.findById(food_item_id);
         if (restaurant.isPresent() && user.isPresent() && foodItem.isPresent()) {
-            service.save(new Orders(user_id, restaurant_id, food_item_id));
+            service.save(new Orders(user.get(), restaurant.get(), foodItem.get()));
         } else {
             model.addAttribute("message", "User ID or Restaurant ID or Food Item ID not found");
             return "message";
@@ -97,5 +98,67 @@ public class OrderController {
     public String deleteAll(Model model) {
         service.deleteAll();
         return showOrders(model);
+    }
+
+    @GetMapping("/showuseridform")
+    public String showUserIdForm(Model model) {
+        return "show-order-user-id";
+    }
+
+    @PostMapping("/showuserorder")
+    public String showUserOrder(
+            @RequestParam("id") Long id,
+            Model model
+    ) {
+        Optional<Orders> order = service.findById(id);
+        if (order.isPresent()) {
+            User user = order.get().getUser();
+            List<User> users = new ArrayList<>();
+            users.add(user);
+            model.addAttribute("users", users);
+            return "all-users";
+        }
+        return "all-users";
+    }
+
+    @GetMapping("/showrestaurantidform")
+    public String showRestaurantIdForm(Model model) {
+        return "show-order-restaurant-id";
+    }
+
+    @PostMapping("/showrestaurantorder")
+    public String showRestaurantOrder(
+            @RequestParam("id") Long id,
+            Model model
+    ) {
+        Optional<Orders> order = service.findById(id);
+        if (order.isPresent()) {
+            Restaurant restaurant = order.get().getRestaurant();
+            List<Restaurant> restaurants = new ArrayList<>();
+            restaurants.add(restaurant);
+            model.addAttribute("restaurants", restaurants);
+            return "all-restaurants";
+        }
+        return "all-restaurants";
+    }
+
+    @GetMapping("/showfooditemidform")
+    public String showFoodItemIdForm(Model model) {
+        return "show-order-fooditem-id";
+    }
+    @PostMapping("/showfooditemorder")
+    public String showFoodItemOrder(
+            @RequestParam("id") Long id,
+            Model model
+    ) {
+        Optional<Orders> order = service.findById(id);
+        if (order.isPresent()) {
+            FoodItem item = order.get().getFoodItem();
+            List<FoodItem> items = new ArrayList<>();
+            items.add(item);
+            model.addAttribute("items", items);
+            return "all-food-items";
+        }
+        return "all-food-items";
     }
 }
