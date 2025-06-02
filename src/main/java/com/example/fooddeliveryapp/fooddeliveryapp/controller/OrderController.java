@@ -55,7 +55,7 @@ public class OrderController {
     @PostMapping("/resultbyid")
     public String getOrderById(@RequestParam("id") Long id, Model model) {
         Optional<Orders> order = service.findById(id);
-        order.ifPresent(value -> model.addAttribute("items", value));
+        order.ifPresent(value -> model.addAttribute("orders", value));
         return "all-orders";
     }
 
